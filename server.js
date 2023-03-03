@@ -18,7 +18,7 @@ app.get("/api/palabras/:pos", (req, res) => {
   const palabra = frase.split(" ")[position - 1];
 
   res.send({
-    buscada: palabra,
+    PalabraBuscada: palabra,
   });
 });
 

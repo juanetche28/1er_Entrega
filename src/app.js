@@ -1,7 +1,14 @@
 import express from "express";
 import ProductManager from "./ProductManager.js";
-const manager = new ProductManager("./Products.json");
+import productsRouter from "./routes/products.router.js";
+import cartsRouter from "./routes/carts.router.js";
+
+const manager = new ProductManager("./src/Products.json");
 const app = express();
+
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
+
 
 app.get("/products", async (req, res) => {
     const products = await manager.getProducts();
