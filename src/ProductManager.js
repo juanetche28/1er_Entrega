@@ -27,11 +27,11 @@ class ProductManager {
         });
     }
     
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, code, price, status, stock, category, thumbnail) {
         const products = await this.getProducts();
 
-        if (!title || !description || !price || !thumbnail || !code || !stock) {
-            throw new Error("Missing parameters, check that there is no missing load title, description, price thumbnail, code or stock");
+        if (!title || !description || !code || !price || !status || !stock || !category || !thumbnail) {
+            throw new Error("Missing parameters, check that there is no missing load title, description, price, thumbnail, code or stock");
         }
 
         const productWithSameCode = products.some((p) => {
@@ -46,10 +46,12 @@ class ProductManager {
             id: this.#nextId,
             title,
             description,
-            price,
-            thumbnail,
             code,
+            price,
+            status,
             stock,
+            category,
+            thumbnail
         };
 
         const updateProducts = [...products, newProduct];
@@ -99,18 +101,6 @@ class ProductManager {
 export default ProductManager;
 
 async function main(){
-//const manager = new ProductManager("./Products.json");
-//console.log(await manager.getProducts());  // Me muestra mi array vacio (Aun no cargue prodcutos)
-//await manager.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin Imagen", "abc123", 25);  // Cargo producto a mi array
-//await manager.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin Imagen", "abc123", 25);  // Cargo producto con codigo repetido a mi array para mostrar error "Product with the same existing code"
-//await manager.addProduct("Manzana", "Esto es una Manzana", 100, "http//manzana.png", "codigo1", 10);  // Cargo producto a mi array
-//await manager.addProduct("Banana", "es una Banana", 50, "http://banana.png", "codigo2", 5);  // Cargo producto a mi array
-//await manager.addProduct("Pera", "es una pera", 30, "http://peras.png", "codigo3", 15);  // Cargo producto a mi array
-//console.log(await manager.getProducts());  // Muestro mi array con todos los productos cargados hasta ahora
-//const product = await manager.getProductById(1);  // Busco un producto con el ID 3
-//console.log(product); // muestro el producto buscado con ID
-//await manager.deleteProduct(3);  // Elimino el producto
-//await manager.updateProduct(6, {id: 4,title: "Actualizado",description: "Actualizado",price: 11});  // Actualizo el producto
 }
 main();
 

@@ -14,7 +14,7 @@ cartsRouter.post("/", (req, res) => {
 
   const newCart = { username, email };
 
-  users = [...carts, newCart];
+  carts = [...carts, newCart];
 
   res.send(newCart);
 });
