@@ -1,9 +1,7 @@
 import express from "express";
-import ProductManager from "./ProductManager.js";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 
-const manager = new ProductManager("./src/Products.json");
 const app = express();
 
 app.use("/api/products", productsRouter);

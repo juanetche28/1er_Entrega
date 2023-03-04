@@ -19,15 +19,14 @@ productsRouter.get("/", (req, res) => {
 
 productsRouter.get("/:pid", (req, res) => {
   const pid = Number(req.params.pid);
-  const product = products.find((u) => u.id === parseInt(pid)); // converti a Numero porque lo lee por defecto como string 
-  
-  // Si no encontramos el Producto respondemos con un not found
-    if (!product) {
+  const productFind = products.find((u) => u.id === parseInt(pid)); // converti a Numero porque lo lee por defecto como string 
+    // Si no encontramos el Producto respondemos con un not found
+    if (!productFind) {
       return res
       .status(404)
       .send({error: `The product with id ${pid} does not exist`});
   } else {
-      res.send(product);
+      res.send(productFind);
   }
 });
 
@@ -37,6 +36,8 @@ productsRouter.get("/:pid", (req, res) => {
 productsRouter.post("/", (req, res) => {
   const newProduct = req.body;
   manager.addProduct(newProduct.title, newProduct.description, newProduct.code, newProduct.price, newProduct.status, newProduct.stock, newProduct.category, newProduct.thumbnail);
+  
+  // Muestro error si esta duplicado el CODE
   const productWithSameCode = products.some((p) => {
     return p.code === newProduct.code;
   });
@@ -63,8 +64,6 @@ productsRouter.put("/:pid", (req, res) => {
   } else {
       res.send(`The product with id ${pid} was successfully updated`);
   }
-
-  res.send(products);
 });
 
 // La ruta DELETE /:pid deberá eliminar el producto con el pid indicado.

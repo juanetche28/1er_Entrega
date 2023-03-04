@@ -100,8 +100,4 @@ class ProductManager {
 
 export default ProductManager;
 
-async function main(){
-}
-main();
-
 
