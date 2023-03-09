@@ -10,7 +10,7 @@ productsRouter.use(json());
 
 // La ruta raíz GET / deberá listar todos los productos de la base.
 
-productsRouter.get("/", (req, res) => {
+productsRouter.get("/", async (req, res) => {
   res.send(products);
 });
 

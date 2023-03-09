@@ -15,9 +15,8 @@ cartsRouter.get("/", (req, res) => {
 //La ruta raíz POST / deberá crear un nuevo carrito
 
 cartsRouter.post("/", (req, res) => {
-  const newCart = req.body;
-  manager.addCart(newCart)
-  res.send(newCart);
+  manager.addCart()
+  res.send(`Cart created successfully.`);
 });
 
 

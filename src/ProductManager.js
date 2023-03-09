@@ -1,11 +1,10 @@
 import fs from "fs";
 
 class ProductManager {
-    #path = "./Products.json";
+    #path = "";
     constructor(path) {
         this.#path = path;
     }
-    #nextId = 0;
     
     async getProducts() {
         try {
@@ -42,8 +41,12 @@ class ProductManager {
             throw new Error("Product with the same existing code.");
         }
 
+        const getIDs = products.map(getId => getId.id)
+        const numberIDS = getIDs.map(Number);
+        const nextId = Math.max(...numberIDS);
+
         const newProduct = {
-            id: this.#nextId,
+            id: nextId + 1,
             title,
             description,
             code,
@@ -56,7 +59,7 @@ class ProductManager {
 
         const updateProducts = [...products, newProduct];
         await fs.promises.writeFile(this.#path, JSON.stringify(updateProducts));
-        this.#nextId += 1;
+
     }
 
     async updateProduct(productId, dataToUpdate){
@@ -96,6 +99,7 @@ class ProductManager {
             console.log(`item with id ${productId} deleted successfully!`);
         };
     }
+
 }
 
 export default ProductManager;

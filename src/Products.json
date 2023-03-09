@@ -27,7 +27,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": 7,
         "title": "Durazno Actualizado",
         "description": "Esto es un Durazno",
         "code": "PROD03",
@@ -56,16 +56,16 @@
     },
     {
         "id": 4,
-        "title": "Zanahoria",
-        "description": "Esto es una Zanahoria",
-        "code": "PROD07",
-        "price": 6000,
+        "title": "Durazno Actualizado",
+        "description": "Esto es un Durazno",
+        "code": "PROD03",
+        "price": 60,
         "status": "true",
         "stock": 50,
         "category": "especiales",
         "thumbnail": [
             "Sin Imagen",
-            "Sin Imagen2"
+            "Sin Imagen2_Actualizado"
         ]
     }
 ]

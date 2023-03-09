@@ -1,11 +1,10 @@
 import fs from "fs";
 
 class CartManager {
-    #path = "./Carts.json";
+    #path = "";
     constructor(path) {
         this.#path = path;
     }
-    #nextId = 0;
 
 
     //Listar todos los carritos
@@ -19,35 +18,21 @@ class CartManager {
     }
 
     //Agregar nuevo Carrito
-    async addCart(products) {
+    async addCart() {
         const carts = await this.getCarts();
-    
-        if (!products)  {
-            throw new Error("Missing parameters, check that there is no missing load products");
-        }
-        
+
+        const getIDs = carts.map(getId => getId.idCart)
+        const numberIDS = getIDs.map(Number);
+        const nextId = Math.max(...numberIDS);        
+            
         const newCart = {
-            idCart: this.#nextId,
-            products: products
+            idCart: nextId+1,
+            products: []
         };
 
         const updateCarts = [...carts, newCart];
         await fs.promises.writeFile(this.#path, JSON.stringify(updateCarts));
-        this.#nextId += 1;
     }
-
-    // Obtener un Carrito por ID
-
-    // async getCartById(cartId) {
-    //     const carts = await this.getCarts();
-    //     const result = (carts.find((p) => p.idCart === parseInt(cartId)));
-    //     return new Promise ((resolve, reject) => {
-    //         if (result == null) {
-    //             reject("Cart id not found.");
-    //         }
-    //         resolve(result);
-    //     });
-    // }
 
     // Agregar un producto al carrito
     async addProduct(cid, pid) {
@@ -71,7 +56,7 @@ class CartManager {
             cartFind.products = updateProduct;
 
             // Actualizo mi base de datos "Carts.json" con el carrito actualizado 
-            const updateCarts = [...carts, cartFind];
+            const updateCarts = [...carts];
             await fs.promises.writeFile(this.#path, JSON.stringify(updateCarts));
 
         } else { 
